@@ -1,10 +1,9 @@
-
 /*
  * Copyright (C) 2011 The Code Bakers
  * Authors: Cleuton Sampaio e Francisco Rodrigues
  * e-mail: thecodebakers@gmail.com
- * Project: http://code.google.com/p/biomago/
- * Site: http://thecodebakers.blogspot.com
+ * Project: http://code.google.com/p/android-webxpose
+ * Site: http://www.thecodebakers.org
  *
  * Licensed under the GNU GPL, Version 3.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +19,6 @@
  * 
  * @author Cleuton Sampaio e Francisco Rogrigues - thecodebakers@gmail.com
  */
-
 
 package org.thecodebakers.web;
 
