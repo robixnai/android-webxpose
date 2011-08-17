@@ -22,23 +22,210 @@
 
 package org.thecodebakers.web;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.net.URL;
+import java.util.Enumeration;
+
 import org.thecodebakers.web.service.WebServerService;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class WebStart extends Activity {
     /** Called when the activity is first created. */
+	
+	private String ipAddress;
+	private EditText defaultPort;
+	private EditText defaultAdminPort;
+	private EditText defaultPath;
+	private TextView txtIpAddress;
+	private Button btnStartServer;
+	private Button btnStopServer;
+	private final String TAG = "WebXposeGUI";
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
+    	Resources res = getResources();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        btnStartServer = (Button) this.findViewById(R.id.btnStart);
+        btnStopServer = (Button) this.findViewById(R.id.btnStop);
+        defaultPort = (EditText) this.findViewById(R.id.porta);
+        defaultAdminPort = (EditText) this.findViewById(R.id.portaadm);
+        int adminPort = Integer.parseInt(defaultAdminPort.getText().toString());
+        defaultPath = (EditText) this.findViewById(R.id.sharedFolder);
+        txtIpAddress = (TextView) this.findViewById(R.id.ipAddress);
+        checkNetwork();
+        if (checkAdminPort(adminPort)) {
+        	btnStopServer.setEnabled(true);
+        	btnStartServer.setEnabled(false);
+        	Toast.makeText(getApplicationContext(), res.getString(R.string.serverIsStarted), Toast.LENGTH_LONG).show();
+        }
+        else {
+        	Toast.makeText(getApplicationContext(), res.getString(R.string.serverNotStarted), Toast.LENGTH_LONG).show();
+        }
+        
+    }
+    
+    private void checkNetwork() {
+    	Resources res = getResources();
+    	StringBuffer ipa = new StringBuffer();
+    	ConnectivityManager conMgr =  (ConnectivityManager)getSystemService(this.getApplicationContext().CONNECTIVITY_SERVICE);
+    	NetworkInfo info = conMgr.getActiveNetworkInfo();
+    	if (info != null) {
+        	if (info.isAvailable()) {
+        		if (info.isConnected()) {
+      				try {
+      					Enumeration<NetworkInterface> nis = NetworkInterface.getNetworkInterfaces();
+      					while (nis.hasMoreElements()) {
+      						NetworkInterface ni = nis.nextElement();
+      						Enumeration<InetAddress> ipads = ni.getInetAddresses();
+      						while (ipads.hasMoreElements()) {
+      							InetAddress ipad = ipads.nextElement();
+      							if (!ipad.isLoopbackAddress()) {
+      								ipa.append(ipad.getHostAddress().toString());
+      								if (ipad.isSiteLocalAddress()) {
+      									ipa.append(" (LOCAL)");
+      								}
+      								ipa.append("\n");
+      								
+      							}
+      						}
+      						if (ipa.length() > 0) {
+      							txtIpAddress.setText(ipa.toString());
+    							this.btnStartServer.setEnabled(true);  							
+      						}
+      					}
+        			} catch (SocketException ex) {
+        				Log.e(TAG, ex.toString());
+        				Toast.makeText(getApplicationContext(), ex.toString(), Toast.LENGTH_LONG).show();
+        			}
+        		}
+        		else {
+        			Log.e(TAG, res.getString(R.string.actConNotConnected));
+        			Toast.makeText(getApplicationContext(), res.getString(R.string.actConNotConnected), Toast.LENGTH_LONG).show();
+        		}
+        	}
+        	else {
+        		Log.e(TAG, res.getString(R.string.actConNotAvailable));
+        		Toast.makeText(getApplicationContext(), res.getString(R.string.actConNotAvailable), Toast.LENGTH_LONG).show();
+        	}    		
+    	}
+    	else {
+    		Log.e(TAG, res.getString(R.string.actConNotAvailableNull));
+    		Toast.makeText(getApplicationContext(), res.getString(R.string.actConNotAvailableNull), Toast.LENGTH_LONG).show();
+    	}
+
     }
     
     public void start(View view) {
-    	Intent intent = new Intent(this, WebServerService.class);
-    	startService(intent);
+    	Resources res = getResources();
+    	int portaInfo = Integer.parseInt(defaultPort.getText().toString(),10);
+    	int portaInfoAdm = Integer.parseInt(defaultAdminPort.getText().toString(),10);
+    	if (portaInfo < 1024 || portaInfoAdm < 1024) {
+    		Toast.makeText(getApplicationContext(), res.getString(R.string.rootport), Toast.LENGTH_LONG).show();
+    	}
+    	else {
+    		if (verifyPath(defaultPath.getText().toString())) {
+               	Intent intent = new Intent(this, WebServerService.class);
+               	intent.putExtra("ipaddress", txtIpAddress.getText().toString());
+               	intent.putExtra("port", defaultPort.getText().toString());
+               	intent.putExtra("adminPort", defaultAdminPort.getText().toString());
+               	intent.putExtra("sharedfolder", defaultPath.getText().toString());
+               	startService(intent);   
+           		this.btnStopServer.setEnabled(true);
+           		this.btnStartServer.setEnabled(false);
+               	Toast.makeText(getApplicationContext(), res.getString(R.string.startCompleted), Toast.LENGTH_LONG).show();
+    		}
+    	}
+    }
+    
+    public void stop(View view) {
+    	Resources res = getResources();
+    	EditText txtPortaAdm = (EditText) this.findViewById(R.id.portaadm);
+    	int portaAdm = Integer.parseInt(txtPortaAdm.getText().toString());
+    	this.requestStop(portaAdm);
+    	this.btnStopServer.setEnabled(false);
+    	this.btnStartServer.setEnabled(true);
+    	Toast.makeText(getApplicationContext(), res.getString(R.string.stopCompleted), Toast.LENGTH_LONG).show();
+    }
+    
+    private boolean verifyPath(String path) {
+    	Resources res = getResources();
+    	boolean returnCode = false;
+    	if (path.length() < 7) {
+    		Toast.makeText(getApplicationContext(), res.getString(R.string.insecurePath), Toast.LENGTH_LONG).show();
+    		return false;
+    	}
+    	if (path.length() > 7) {
+    		if (!path.substring(0, 8).equals("/sdcard/")) {
+        		Toast.makeText(getApplicationContext(), res.getString(R.string.insecurePath), Toast.LENGTH_LONG).show();
+        		return false;
+    		}
+    	}
+    	if (path.equals("/sdcard")) {
+    		returnCode = true;
+    	}
+    	if (path.matches("[a-zA-Z0-9/]+")) {
+    		returnCode = true;
+    	}
+    	else {
+    		Toast.makeText(getApplicationContext(), res.getString(R.string.invalidPath), Toast.LENGTH_LONG).show();
+    		return false;
+    	}
+    	if (!(new File(path)).exists()) {
+    		Toast.makeText(getApplicationContext(), res.getString(R.string.folderNotFound), Toast.LENGTH_LONG).show();
+    		return false;
+    	}
+    	return returnCode;
+    }
+    
+    private boolean checkAdminPort(int adminPort) {
+    	StringBuffer bigBuf = new StringBuffer();
+    	boolean resultado = false;
+    	try {
+    		InputStream strm = new URL("http://localhost:" + adminPort + "/").openStream();
+    		BufferedReader rdr = new BufferedReader(new InputStreamReader(strm));
+    		String thisLine = rdr.readLine();
+    		while (thisLine != null) {
+    			bigBuf = bigBuf.append(thisLine);
+    			thisLine = rdr.readLine();
+    		}
+    		rdr.close();
+    		resultado = true;
+    		} catch (Exception e) {
+    		}
+    	return resultado;    	
+    }
+    
+    private void requestStop(int adminPort) {
+    	StringBuffer bigBuf = new StringBuffer();
+    	try {
+    		InputStream strm = new URL("http://localhost:" + adminPort + "/shutdown.cgi").openStream();
+    		BufferedReader rdr = new BufferedReader(new InputStreamReader(strm));
+    		String thisLine = rdr.readLine();
+    		while (thisLine != null) {
+    			bigBuf = bigBuf.append(thisLine);
+    			thisLine = rdr.readLine();
+    		}
+    		rdr.close();
+    		} catch (Exception e) {
+    		}
     }
 }
