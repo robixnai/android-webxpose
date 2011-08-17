@@ -106,7 +106,7 @@ public class WebServerService extends Service {
 			PackageManager manager = this.getApplicationContext().getPackageManager();
 			PackageInfo info = manager.getPackageInfo(
 					this.getApplicationContext().getPackageName(), 0);
-			serverName = TAG + R.string.serverName + info.versionName;
+			serverName = TAG + res.getString(R.string.serverName) + " v. " + info.versionName;
 			Log.i(TAG, res.getString(R.string.iniciando));
 			Bundle extras = intent.getExtras();
 			porta = Integer.parseInt(extras.getString("port"));
@@ -244,13 +244,6 @@ public class WebServerService extends Service {
 			
 			public void run() {
 				// Tratamento de cada requisição
-				/*
-				 * Esta é uma implementação muito simpes de 
-				 * Nosso servidor somente lida com GET e HEAD.
-				 * Não lemos nada do socket cliente, apenas a query string.
-				 * Não enviamos nada para o cliente, apenas o arquivo que ele pediu, ou então um erro.
-				 * É permitido listar diretório.
-				 */
 				
 				try {
 					BufferedReader br = new BufferedReader(
@@ -261,18 +254,15 @@ public class WebServerService extends Service {
 					String linha = br.readLine();
 
 					Log.d("WebService",linha);
-
+					
+					HttpRequest request = new HttpRequest();
+					request.decodeRequest(linha);
 									
 					BufferedWriter bw = new BufferedWriter(
 							new OutputStreamWriter(
 							cs.getOutputStream()));
-					String texto = "<html><head><title>Envio de resposta</title>" + 
-						"</head><body><h1>Esta &eacute; uma p&aacute;gina HTML gerada " + 
-						" por uma aplica&ccedil;&atilde;o Java SE</h1></body></html>";
-					bw.write("HTTP/1.0 200 OK\r\n");
-					bw.write("Content-Type: text/html\r\n" );
-					bw.write("Content-Length: " + texto.length() + "\r\n\r\n");
-					bw.write(texto);
+					
+					bw.write(request.httpResponse);
 					bw.flush();
 					cs.close();
 				}
@@ -291,8 +281,23 @@ public class WebServerService extends Service {
 			boolean isDirectoryListing;
 			String  contentType;
 			int     contentLength;
+			String  httpResponseHeader;
+			String  responseContent;
+			String	httpResponse;
+			String  httpHeader;
+			int     httpStatus;
 			
-			int decodeRequest (String line) {
+			void assembleHttpHeader() {
+				String hdr = "HTTP/1.0 ";
+				hdr += httpStatusCodes.get(this.httpStatus) + "\r\n";
+				hdr += "Server: " + serverName + "\r\n";
+				hdr += "Content-Type: " + this.contentType + "\r\n";
+				this.contentLength = this.responseContent.length();
+				hdr += "Content-length: " + this.contentLength + "\r\n";
+				this.httpHeader = hdr + "\r\n";
+			}
+			
+			void decodeRequest (String line) {
 				/*
 				 * O formato do querystring deve ser:
 				 * 
@@ -304,25 +309,37 @@ public class WebServerService extends Service {
 				 */
 				int returnCode = WebServerService.HTTP_OK;
 				if (line.length() < 5) {
-					returnCode = WebServerService.BAD_REQUEST;
+					this.contentType = "text/plain";
+					this.responseContent = "The request is mal formed";
+					this.httpStatus = WebServerService.BAD_REQUEST;
 				}
 				else {
 					httpMethod = line.substring(0, 4).toUpperCase().trim();
 					if (!httpMethod.equals("GET") && !httpMethod.equals("HEAD")) {
-						returnCode = WebServerService.NOT_IMPLEMENTENT;
+						this.responseContent = "Method not implemented.";
+						this.contentType = "text/plain";
+						this.httpStatus = WebServerService.NOT_IMPLEMENTENT;
 					}
 					else {
 						int tamQS = line.length();
 						int posNextSpace = line.indexOf(' ', 4);
 						if (posNextSpace <= 0) {
-							returnCode = WebServerService.BAD_REQUEST;
+							this.contentType = "text/plain";
+							this.responseContent = "The request is mal formed";
+							this.httpStatus = WebServerService.BAD_REQUEST;
 						}
 						else {
 							queryString = line.substring(4, posNextSpace);
+							this.contentType = "text/html";
+							this.responseContent = "<html><body><br/>Recebido: " + queryString + "</body></html>";
+							this.httpStatus = WebServerService.HTTP_OK;
 						}
 					}
 				}
-				return returnCode;
+				
+				// Create the response
+				assembleHttpHeader();
+				this.httpResponse = this.httpHeader + "\r\n" + this.responseContent;
 			}
 			
 		}
