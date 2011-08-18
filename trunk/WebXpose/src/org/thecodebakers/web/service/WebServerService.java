@@ -23,6 +23,7 @@ package org.thecodebakers.web.service;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -330,9 +331,7 @@ public class WebServerService extends Service {
 						}
 						else {
 							queryString = line.substring(4, posNextSpace);
-							this.contentType = "text/html";
-							this.responseContent = "<html><body><br/>Recebido: " + queryString + "</body></html>";
-							this.httpStatus = WebServerService.HTTP_OK;
+							getResponse(queryString);
 						}
 					}
 				}
@@ -340,6 +339,135 @@ public class WebServerService extends Service {
 				// Create the response
 				assembleHttpHeader();
 				this.httpResponse = this.httpHeader + "\r\n" + this.responseContent;
+				Log.d("WebServerService", this.httpResponse);
+			}
+
+			private void getResponse(String queryString2) {
+				Resources res = WebServerService.selfRef.getResources();
+				String titulo = res.getString(R.string.dirListing)  + " " + queryString2;
+				if (fileExists(queryString)) {
+					if (isDirectory(queryString)) {
+						this.responseContent = getDirList(queryString);
+						this.contentType = "text/html";
+						this.httpStatus = WebServerService.HTTP_OK;
+					}
+					else {
+						// é um arquivo... a fazer
+					}
+				}
+				else {
+					this.responseContent = this.beginHTML(titulo) + "<p>" + res.getString(R.string.pathNotFound) + queryString2 + "</p>" + this.endHTML();
+					this.contentType = "text/html";
+					this.httpStatus = WebServerService.HTTP_OK;
+				}
+				
+			}
+
+			private String endHTML() {
+				StringBuffer htmlText = new StringBuffer();
+				Resources res = WebServerService.selfRef.getResources();
+				htmlText.append("<br/><b><a href='http://www.thecodebakers.org'>The Code Bakers</a></b></body></html>");
+				return htmlText.toString();
+			}
+
+			private String beginHTML(String titulo) {
+				StringBuffer htmlText = new StringBuffer();
+				Resources res = WebServerService.selfRef.getResources();
+				htmlText.append("<html><head><title>" + titulo + "</title>");
+				htmlText.append("<style>body {font-family:'Arial', Sans-serif; font-size: 1.5em;}</style>");
+				htmlText.append("<script type=\"text/javascript\">");
+				htmlText.append("<!-- \r\n");
+				htmlText.append("var dsi=1.5;\r\n");
+				htmlText.append("function fontAdjust(p) {\r\n");
+				htmlText.append("if (p == \"grow\") {\r\n");
+				htmlText.append("dsi = dsi + 0.5;\r\n");
+				htmlText.append("}\r\n");
+				htmlText.append("else {\r\n");
+				htmlText.append("if (dsi > 1) {\r\n");
+				htmlText.append("dsi = dsi - 0.5;\r\n");
+				htmlText.append("}\r\n");
+				htmlText.append("}\r\n");
+				htmlText.append("document.body.style.fontSize=dsi + 'em';\r\n");
+				htmlText.append("}\r\n");
+				htmlText.append(" -->\r\n");
+				htmlText.append("</script>\r\n");
+				htmlText.append("</head><body>");
+				htmlText.append("<br/>" + res.getString(R.string.genBy) + " " + res.getString(R.string.app_name));
+				htmlText.append("&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"javascript:fontAdjust('grow');\" style=\"font-size: 2em\">+A</a>");
+				htmlText.append("&nbsp;&nbsp;&nbsp;<a href=\"javascript:fontAdjust('small');\" style=\"font-size: 1.5em\">-A</a>");
+				htmlText.append("<br/>");
+				return htmlText.toString();
+			}
+
+			private String getDirList(String queryString2) {
+				Resources res = WebServerService.selfRef.getResources();
+				StringBuffer listing = new StringBuffer();
+				String realPath = "/sdcard" + (queryString2.charAt(0) == '/' ? queryString2 : ("/" + queryString2));
+				String titulo = res.getString(R.string.dirListing)  + " " + realPath;
+				File desiredFile = new File(realPath);
+				listing.append(this.beginHTML(titulo));
+				
+				// Loop principal
+				File [] conteudo = desiredFile.listFiles();
+				listing.append("<br/><b>" + desiredFile.getAbsolutePath() + ":</b>");
+				listing.append("<ul>");
+				if (desiredFile.getAbsolutePath().length() > 7) {
+					listing.append("<li><a href='"
+							+ removeSdcard(getParent(desiredFile)) + "'>" + "["+ res.getString(R.string.voltar) + "]" + "</a>");
+					listing.append("</li>");
+				}
+				for (int x = 0; x < conteudo.length; x++) {
+					if (!conteudo[x].isHidden()) {
+						listing.append("<li><a href='"
+								+ removeSdcard(conteudo[x].getAbsolutePath()) + "'>" + conteudo[x].getPath() + "</a>");
+						if (conteudo[x].isDirectory()) {
+							listing.append(" (DIR)");
+						}
+						listing.append("</li>");
+					}
+				}
+				listing.append("</ul>");
+				listing.append(this.endHTML());
+				return listing.toString();
+			}
+
+			private String getParent(File desiredFile) {
+				String retorno = "";
+				Log.d("WebServerService", "@@@ " + desiredFile.getAbsolutePath());
+				int posLast = desiredFile.getAbsolutePath().lastIndexOf('/');
+				retorno = desiredFile.getAbsolutePath().substring(0, posLast);
+				Log.d("WebServerService", "@@@ " + retorno);
+				return retorno;
+			}
+
+			private String removeSdcard(String path) {
+				// /sdcard
+				if (path.length() > 7) {
+					return path.substring(7);
+				}
+				else {
+					return "/";
+				}
+			}
+			
+			private boolean isDirectory(String queryString2) {
+				boolean resultado = false;
+				String realPath = "/sdcard" + (queryString2.charAt(0) == '/' ? queryString2 : ("/" + queryString2));
+				File desiredFile = new File(realPath);
+				if (desiredFile.isDirectory()) {
+					resultado = true;
+				}
+				return resultado;
+			}
+
+			private boolean fileExists(String queryString2) {
+				boolean resultado = false;
+				String realPath = "/sdcard" + (queryString2.charAt(0) == '/' ? queryString2 : ("/" + queryString2));
+				File desiredFile = new File(realPath);
+				if (desiredFile.exists()) {
+					resultado = true;
+				}
+				return resultado;
 			}
 			
 		}

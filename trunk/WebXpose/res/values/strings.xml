@@ -27,4 +27,8 @@
     <string name="stopCompleted">Finish stopping. Check if the service is running using a browser.</string>
     <string name="serverIsStarted">Server appears to be running.</string>
     <string name="serverNotStarted">Server apperas to be stopped. Have you changed the Admin Port? If Yes, then set the value in the correct field.</string>
+    <string name="pathNotFound">The path does not exist:</string>
+    <string name="dirListing">Folder listing:</string>
+    <string name="genBy">Created by</string>
+    <string name="voltar">back</string>
 </resources>
