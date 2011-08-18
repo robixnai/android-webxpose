@@ -28,18 +28,7 @@
     android:layout_height="wrap_content" 
     android:text="@string/defaultPort"
     android:inputType="number"/>
-<TextView  
-	style="@style/texto1"  
-    android:layout_width="fill_parent" 
-    android:layout_height="wrap_content" 
-    android:text="@string/portaadm"
-    />    
-<EditText  
-	android:id="@+id/portaadm"
-    android:layout_width="fill_parent" 
-    android:layout_height="wrap_content" 
-    android:text="@string/defaultAdminPort"
-    android:inputType="number"/>    
+
 <TextView  
 	style="@style/texto1"  
     android:layout_width="fill_parent" 
@@ -60,12 +49,5 @@
 	android:onClick="start"
 	android:enabled="false"
 />
-<Button
-	android:id="@+id/btnStop"
-	android:text="@string/stopService"
-    android:layout_width="fill_parent" 
-    android:layout_height="wrap_content" 
-	android:onClick="stop"
-	android:enabled="false"
-/>
+
 </LinearLayout>

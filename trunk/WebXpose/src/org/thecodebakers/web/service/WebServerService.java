@@ -54,7 +54,6 @@ public class WebServerService extends Service {
 	private ServerSocket serverSocket;
 	private ServerSocket serverAdmSocket;
 	private Thread mainProcessThread;
-	private Thread adminProcessThread;
 	private final String TAG = "WebXpose-";
 	private String serverName;
 	private static final Map<Integer,String> httpStatusCodes = new HashMap<Integer, String>();
@@ -73,19 +72,6 @@ public class WebServerService extends Service {
 		httpStatusCodes.put(404, "404 Not Found");
 		httpStatusCodes.put(500, "500 Internal Server Error");
 		httpStatusCodes.put(501, "501 Not Implemented");
-	}
-	
-	public synchronized void stopEverything() {
-		try {
-			this.serverSocket.close();
-			this.serverAdmSocket.close();
-			this.mainProcessThread.interrupt();
-			this.adminProcessThread.interrupt();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
 	}
 	
 	
@@ -111,27 +97,16 @@ public class WebServerService extends Service {
 			Log.i(TAG, res.getString(R.string.iniciando));
 			Bundle extras = intent.getExtras();
 			porta = Integer.parseInt(extras.getString("port"));
-			portaAdm = Integer.parseInt(extras.getString("adminPort"));
 			webRoot = extras.getString("sharedfolder");
 			Log.i(TAG, extras.getString("ipaddress") + ":" + porta + "/" + webRoot);
 			try {
 				serverSocket = new ServerSocket(porta);
-				try {
-					serverAdmSocket = new ServerSocket(portaAdm);
-					ProcessWebRequests procReq = new ProcessWebRequests(serverSocket);
-					mainProcessThread = new Thread(procReq);
-					mainProcessThread.start();
-					ProcessAdminRequests procAdm = new ProcessAdminRequests(serverAdmSocket);
-					adminProcessThread = new Thread(procAdm);
-					adminProcessThread.start();
-					Log.i(TAG, res.getString(org.thecodebakers.web.R.string.onstartok));
-					Toast.makeText(this.getApplicationContext(), R.string.serviceStarted, Toast.LENGTH_LONG);
-					return START_STICKY;
-				}
-				catch (Exception ex) {
-					Log.e(TAG, res.getString(R.string.errorOpeningAdminPort));
-					Toast.makeText(this.getApplicationContext(), R.string.errorOpeningAdminPort, Toast.LENGTH_LONG);
-				}
+				ProcessWebRequests procReq = new ProcessWebRequests(serverSocket);
+				mainProcessThread = new Thread(procReq);
+				mainProcessThread.start();
+				Log.i(TAG, res.getString(org.thecodebakers.web.R.string.onstartok));
+				Toast.makeText(this.getApplicationContext(), R.string.serviceStarted, Toast.LENGTH_LONG);
+				return START_STICKY;
 			}
 			catch (Exception ex) {
 				Log.e(TAG, res.getString(R.string.errorOpeningPort));
@@ -143,69 +118,7 @@ public class WebServerService extends Service {
 		return START_NOT_STICKY;
 	}
 
-	class ProcessAdminRequests implements Runnable {
-		// Um Thread para acompanhar os requests administrativos
-		
-		ServerSocket srvSock;
-		
-		ProcessAdminRequests (ServerSocket srvSock) {
-			this.srvSock = srvSock;
-		}
-		
-		public void run() {
-			while (true) {
-				Socket s = null;
-				try {
-                    s = srvSock.accept();
-                    if(processa(s)) {
-                    	// Request to stop received:
-                    	WebServerService webServer = (WebServerService) WebServerService.selfRef;
-                    	webServer.stopEverything();
-                    	Log.i("WebService", "Processing stop...");
-                    }
-                    s.close();					
-				}
-				catch(IOException ioe) {
-					System.out.println(ioe.getMessage());
-					break;
-				}
-			}				
-		}
-		
-		private boolean processa(Socket s) {
-			boolean resultado = false;
-			try {
-				BufferedReader br = new BufferedReader(
-						new InputStreamReader(
-						s.getInputStream()));
-				
-				// Ler o que veio no request, o querystring. Só lemos uma única linha
-				String linha = br.readLine();
-				Log.d("WebService","@@@ Admin request: " + linha);
-				if (linha.indexOf("shutdown.cgi") >= 0) {
-					Log.i("WebService","@@@@@@@Shutdown");
-					WebServerService.selfRef.stopSelf();
-					resultado = true;
-				}
-				BufferedWriter bw = new BufferedWriter(
-						new OutputStreamWriter(
-						s.getOutputStream()));
-				String texto = "<html><head><title>Envio de resposta</title>" + 
-					"</head><body><h1>Request " + linha + " processado.</h1></body></html>";
-				bw.write("HTTP/1.0 200 OK\r\n");
-				bw.write("Content-Type: text/html\r\n" );
-				bw.write("Content-Length: " + texto.length() + "\r\n\r\n");
-				bw.write(texto);
-				bw.flush();
-				s.close();				
-			}
-			catch (IOException ioe) {
-				resultado = true;
-				Log.e("WebService", ioe.getMessage());
-			}
-			return resultado;
-		}
-	}
+
 	
 	class ProcessWebRequests implements Runnable {
 		// Ele cria um Thread em separado, só para rodar o loop de espera do servidor
@@ -374,28 +287,9 @@ public class WebServerService extends Service {
 				StringBuffer htmlText = new StringBuffer();
 				Resources res = WebServerService.selfRef.getResources();
 				htmlText.append("<html><head><title>" + titulo + "</title>");
-				htmlText.append("<style>body {font-family:'Arial', Sans-serif; font-size: 1.5em;}</style>");
-				htmlText.append("<script type=\"text/javascript\">");
-				htmlText.append("<!-- \r\n");
-				htmlText.append("var dsi=1.5;\r\n");
-				htmlText.append("function fontAdjust(p) {\r\n");
-				htmlText.append("if (p == \"grow\") {\r\n");
-				htmlText.append("dsi = dsi + 0.5;\r\n");
-				htmlText.append("}\r\n");
-				htmlText.append("else {\r\n");
-				htmlText.append("if (dsi > 1) {\r\n");
-				htmlText.append("dsi = dsi - 0.5;\r\n");
-				htmlText.append("}\r\n");
-				htmlText.append("}\r\n");
-				htmlText.append("document.body.style.fontSize=dsi + 'em';\r\n");
-				htmlText.append("}\r\n");
-				htmlText.append(" -->\r\n");
-				htmlText.append("</script>\r\n");
-				htmlText.append("</head><body>");
-				htmlText.append("<br/>" + res.getString(R.string.genBy) + " " + res.getString(R.string.app_name));
-				htmlText.append("&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"javascript:fontAdjust('grow');\" style=\"font-size: 2em\">+A</a>");
-				htmlText.append("&nbsp;&nbsp;&nbsp;<a href=\"javascript:fontAdjust('small');\" style=\"font-size: 1.5em\">-A</a>");
-				htmlText.append("<br/>");
+				
+				htmlText.append("</head><body><br/>");
+
 				return htmlText.toString();
 			}
 

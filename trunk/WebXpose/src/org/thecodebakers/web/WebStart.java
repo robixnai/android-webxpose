@@ -52,11 +52,9 @@ public class WebStart extends Activity {
 	
 	private String ipAddress;
 	private EditText defaultPort;
-	private EditText defaultAdminPort;
 	private EditText defaultPath;
 	private TextView txtIpAddress;
 	private Button btnStartServer;
-	private Button btnStopServer;
 	private final String TAG = "WebXposeGUI";
 	
     @Override
@@ -65,21 +63,10 @@ public class WebStart extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         btnStartServer = (Button) this.findViewById(R.id.btnStart);
-        btnStopServer = (Button) this.findViewById(R.id.btnStop);
         defaultPort = (EditText) this.findViewById(R.id.porta);
-        defaultAdminPort = (EditText) this.findViewById(R.id.portaadm);
-        int adminPort = Integer.parseInt(defaultAdminPort.getText().toString());
         defaultPath = (EditText) this.findViewById(R.id.sharedFolder);
         txtIpAddress = (TextView) this.findViewById(R.id.ipAddress);
         checkNetwork();
-        if (checkAdminPort(adminPort)) {
-        	btnStopServer.setEnabled(true);
-        	btnStartServer.setEnabled(false);
-        	Toast.makeText(getApplicationContext(), res.getString(R.string.serverIsStarted), Toast.LENGTH_LONG).show();
-        }
-        else {
-        	Toast.makeText(getApplicationContext(), res.getString(R.string.serverNotStarted), Toast.LENGTH_LONG).show();
-        }
         
     }
     
@@ -137,8 +124,7 @@ public class WebStart extends Activity {
     public void start(View view) {
     	Resources res = getResources();
     	int portaInfo = Integer.parseInt(defaultPort.getText().toString(),10);
-    	int portaInfoAdm = Integer.parseInt(defaultAdminPort.getText().toString(),10);
-    	if (portaInfo < 1024 || portaInfoAdm < 1024) {
+    	if (portaInfo < 1024) {
     		Toast.makeText(getApplicationContext(), res.getString(R.string.rootport), Toast.LENGTH_LONG).show();
     	}
     	else {
@@ -146,25 +132,15 @@ public class WebStart extends Activity {
                	Intent intent = new Intent(this, WebServerService.class);
                	intent.putExtra("ipaddress", txtIpAddress.getText().toString());
                	intent.putExtra("port", defaultPort.getText().toString());
-               	intent.putExtra("adminPort", defaultAdminPort.getText().toString());
                	intent.putExtra("sharedfolder", defaultPath.getText().toString());
                	startService(intent);   
-           		this.btnStopServer.setEnabled(true);
            		this.btnStartServer.setEnabled(false);
                	Toast.makeText(getApplicationContext(), res.getString(R.string.startCompleted), Toast.LENGTH_LONG).show();
     		}
     	}
     }
     
-    public void stop(View view) {
-    	Resources res = getResources();
-    	EditText txtPortaAdm = (EditText) this.findViewById(R.id.portaadm);
-    	int portaAdm = Integer.parseInt(txtPortaAdm.getText().toString());
-    	this.requestStop(portaAdm);
-    	this.btnStopServer.setEnabled(false);
-    	this.btnStartServer.setEnabled(true);
-    	Toast.makeText(getApplicationContext(), res.getString(R.string.stopCompleted), Toast.LENGTH_LONG).show();
-    }
+
     
     private boolean verifyPath(String path) {
     	Resources res = getResources();

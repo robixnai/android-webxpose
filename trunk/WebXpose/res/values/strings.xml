@@ -8,7 +8,6 @@
     <string name="onstartok">Web Server Service Started</string>
     <string name="iniciando">Starting Web Server Service...</string>
     <string name="porta">TCP Port</string>
-    <string name="portaadm">TCP Admin Port</string>
     <string name="defaultPort">8080</string>
     <string name="defaultAdminPort">8081</string>
     <string name="path">Shared Folder</string>
@@ -19,14 +18,9 @@
     <string name="invalidPath">Paths must contain letters e/or digits and \"/\"</string>
     <string name="folderNotFound">Folder must exist inside /sdcard</string>
     <string name="errorOpeningPort">Exception opening port</string>
-    <string name="errorOpeningAdminPort">Exception opening admin port</string>
     <string name="serviceStarted">Service started</string>
-    <string name="stopService">Stop Service</string>
     <string name="startService">Start Web Server</string>
     <string name="startCompleted">Finish starting. Check the service using a browser.</string>
-    <string name="stopCompleted">Finish stopping. Check if the service is running using a browser.</string>
-    <string name="serverIsStarted">Server appears to be running.</string>
-    <string name="serverNotStarted">Server apperas to be stopped. Have you changed the Admin Port? If Yes, then set the value in the correct field.</string>
     <string name="pathNotFound">The path does not exist:</string>
     <string name="dirListing">Folder listing:</string>
     <string name="genBy">Created by</string>
