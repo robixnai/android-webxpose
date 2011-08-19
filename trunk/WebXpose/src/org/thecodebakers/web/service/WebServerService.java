@@ -10,7 +10,11 @@
  * You may obtain a copy of the License at
  *
  *      http://gplv3.fsf.org/
- *
+ * 
+ * There is one adition/change over the standard GPL V3: The Authors 
+ * may create another product based upon the same code, without following
+ * GPL terms. The new product can be proprietary.
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -19,6 +23,7 @@
  * 
  * @author Cleuton Sampaio e Francisco Rogrigues - thecodebakers@gmail.com
  */
+
 package org.thecodebakers.web.service;
 
 import java.io.BufferedReader;
