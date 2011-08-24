@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="txtAjuda">
+WebXpose é um pequeno servidor Web.\r\n
+Ele permite que você compartilhe arquivos de seu sdcard com outros usuários.\r\n
+Escolha o nome do site, a porta do servidor, a porta administrativa, e então selecione uma pasta dentro do sdcard.\r\n
+Você pode compartilhar o sdcard inteiro, mas não é recomendável.\r\n
+Para iniciar o servidor, clique no botão \"Iniciar Web Server\". E, para parar, clique no botão \"Parar serviço\".\r\n
+Mais ajuda pode ser encontrada no Wiki do projeto, que pode ser acessado ao clicar no botão abaixo.\r\n
+\r\n
+Este programa é distribuído sob a licença GPL V 3, mas os autores reservam o direito de criar uma versão privada separada do programa\r\n
+\r\n
+</string>
+</resources>
