@@ -6,5 +6,12 @@
 
         
         </style>
+        <style name="texto2" parent="@android:style/TextAppearance.Large">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:typeface">sans</item>
+
+        
+        </style>
+        
 
 </resources>

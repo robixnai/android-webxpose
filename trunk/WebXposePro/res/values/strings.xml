@@ -41,4 +41,5 @@
     <string name="WXPROprefs">wxproprefs</string>
     <string name="lblNomeCel">Site title</string>
     <string name="validationProblems">Server not started due to input errors. Correct them and try again.</string>
+    <string name="txtLink">Project WiKi</string>
 </resources>

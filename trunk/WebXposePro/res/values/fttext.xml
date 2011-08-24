@@ -3,31 +3,27 @@
 <string name="ftstring">
 WebXpose Pro - End User License Agreement\r\n
 \r\n
-Definitions:\r\n
+Copyright (C) 2011 The Code Bakers\r\n
+Authors: Cleuton Sampaio e Francisco Rodrigues\r\n
+e-mail: thecodebakers@gmail.com\r\n
+Project: http://code.google.com/p/android-webxpose\r\n
+Site: http://www.thecodebakers.org\r\n
 \r\n
-SOFTWARE: This software;\r\n
-AUTHORS: Cleuton Sampaio and Francisco Rodrigues;\r\n
-USER: You, the end user;\r\n
+Licensed under the GNU GPL, Version 3.0 (the "License");\r\n
+you may not use this file except in compliance with the License.\r\n
+You may obtain a copy of the License at\r\n
+     http://gplv3.fsf.org/\r\n
 \r\n
-1 - License:\r\n
+Unless required by applicable law or agreed to in writing, software\r\n
+distributed under the License is distributed on an "AS IS" BASIS,\r\n
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\r\n
+See the License for the specific language governing permissions and\r\n
+limitations under the License.\r\n
 \r\n
-The AUTHORS grant you a non-exclusive license to use the SOFTWARE, according to this license, which can be transferred to anyone, provided that only a single copy of the SOFTWARE is running at any time;\r\n
-\r\n
-2 - Your rights:\r\n
-\r\n
-The USER may use the SOFTWARE in one portable Android device of his (or her) property. To use in more than one device requires an additional license. The SOFTWARE may be used in emulated devices, such as the AVD, provided than only one copy per time is used;
-The software is used to share the device\'s sdcard files to public. The USER is aware of the risks and cannot blame the AUTHORS for any kind of security problem;\r\n
-\r\n
-3 - What you cannot do:\r\n
-\r\n
-The USER may not:\r\n 
-a) Install or use the SOFTWARE in more than one device, including AVDs;\r\n
-b) Use any kind of reverse engineering technique to \"peek\" at the source code, even for study purposes;\r\n 
-c) Redistribute the SOFTWARE without express authorization of the AUTHORS. The only exception is the selling of the device, which may include the installed copy of the SOFTWARE, provided that the USER is selling the device, not the SOFTWARE. In this case, the USER may not keep other copy of the SOFTWARE without buying aditional licenses;\r\n
-d) Buy and resell (or give away for free) any license of the software without express authorization from the AUTHORS;\r\n
-\r\n
-In case of questions do not use the software. Please contact us: thecodebakers@gmail.com, and, if you are not satisfied, we can refund you.\r\n
-\r\n
-The AUTHORS.\r\n
+The over the GPL V 3 there is the following addition:\r\n 
+- The authors may create another version of the program which will be distributed\r\n
+   as proprietary software.\r\n
+ \r\n
+@author Cleuton Sampaio e Francisco Rogrigues - thecodebakers@gmail.com\r\n
 </string>
 </resources>

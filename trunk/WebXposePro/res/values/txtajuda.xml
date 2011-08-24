@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="txtAjuda">
+WebXpose is a tiny Web Server app.\r\n
+It allows you to expose files in your sdcard to other users.\r\n
+Choose the site name, the server port and the admin port, then you must choose a folder inside your sdcard.\r\n
+You can share the entire sdcard, but it is not advisable.\r\n
+To start the server, click on the \"start\" button. And, to stop the server, click on the \"stop\" button.\r\n
+More help is available in the project Wiki, which can be found in the link bellow.\r\n
+</string>
+</resources>
