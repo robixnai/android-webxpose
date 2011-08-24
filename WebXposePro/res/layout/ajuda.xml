@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent"
+  >
+  <LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+  	android:layout_width="fill_parent"
+  	android:layout_height="fill_parent"
+  	android:orientation="vertical"
+  >
+  	  <ImageView
+  	  	android:layout_width="fill_parent"
+  		android:layout_height="fill_parent"
+  		android:src="@drawable/logo"
+  		android:onClick="web"
+  	  />
+	  <TextView
+	  	android:id="@+id/txtAjuda"
+	  	style="@style/texto1"
+	  	android:text="@string/ftstring"
+	  	android:layout_width="fill_parent"
+	  	android:layout_height="wrap_content"
+	    />
+	  <TextView
+	  	android:id="@+id/txtLink"
+	  	style="@style/texto2"
+	  	android:onClick="wiki"
+	  	android:text="@string/txtLink"
+	  	android:layout_width="fill_parent"
+	  	android:layout_height="wrap_content"
+	    />
+	  <Button
+	  	android:id="@+id/btnClose"
+	  	android:onClick="fechar"
+	  	android:text="@string/btnFtBack"
+	  	android:layout_width="fill_parent"
+	  	android:layout_height="wrap_content"
+		android:gravity="center_horizontal"  
+	  />
+  </LinearLayout>
+</ScrollView>
+

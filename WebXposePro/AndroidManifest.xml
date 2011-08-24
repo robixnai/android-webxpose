@@ -17,6 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".WsFirstTime"></activity>
+        <activity android:name=".WsControllerHelp"></activity>
 		<service android:name=".WebServerService"
 			android:process=":remote"			
 			/>
