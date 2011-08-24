@@ -3,7 +3,7 @@ WebXpose Pro - End User License Agreement
 Copyright (C) 2011 The Code Bakers
 Authors: Cleuton Sampaio e Francisco Rodrigues
 e-mail: thecodebakers@gmail.com
-Project: http://http://code.google.com/p/tcbnewswidget
+Project: http://code.google.com/p/android-webxpose
 Site: http://www.thecodebakers.org
 
 Licensed under the GNU GPL, Version 3.0 (the "License");
@@ -16,5 +16,9 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
+
+The over the GPL V 3 there is the following addition: 
+- The authors may create another version of the program which will be distributed
+   as proprietary software.
  
 @author Cleuton Sampaio e Francisco Rogrigues - thecodebakers@gmail.com
