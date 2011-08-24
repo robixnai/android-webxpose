@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="ftstring">
+WebXpose Pro - End User License Agreement\r\n
+\r\n
+Definitions:\r\n
+\r\n
+SOFTWARE: This software;\r\n
+AUTHORS: Cleuton Sampaio and Francisco Rodrigues;\r\n
+USER: You, the end user;\r\n
+\r\n
+1 - License:\r\n
+\r\n
+The AUTHORS grant you a non-exclusive license to use the SOFTWARE, according to this license, which can be transferred to anyone, provided that only a single copy of the SOFTWARE is running at any time;\r\n
+\r\n
+2 - Your rights:\r\n
+\r\n
+The USER may use the SOFTWARE in one portable Android device of his (or her) property. To use in more than one device requires an additional license. The SOFTWARE may be used in emulated devices, such as the AVD, provided than only one copy per time is used;
+The software is used to share the device\'s sdcard files to public. The USER is aware of the risks and cannot blame the AUTHORS for any kind of security problem;\r\n
+\r\n
+3 - What you cannot do:\r\n
+\r\n
+The USER may not:\r\n 
+a) Install or use the SOFTWARE in more than one device, including AVDs;\r\n
+b) Use any kind of reverse engineering technique to \"peek\" at the source code, even for study purposes;\r\n 
+c) Redistribute the SOFTWARE without express authorization of the AUTHORS. The only exception is the selling of the device, which may include the installed copy of the SOFTWARE, provided that the USER is selling the device, not the SOFTWARE. In this case, the USER may not keep other copy of the SOFTWARE without buying aditional licenses;\r\n
+d) Buy and resell (or give away for free) any license of the software without express authorization from the AUTHORS;\r\n
+\r\n
+In case of questions do not use the software. Please contact us: thecodebakers@gmail.com, and, if you are not satisfied, we can refund you.\r\n
+\r\n
+The AUTHORS.\r\n
+</string>
+</resources>
