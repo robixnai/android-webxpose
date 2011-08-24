@@ -469,8 +469,8 @@ public class WebServerService extends Service {
 				htmlText.append("</head><body>");
 				htmlText.append(tit);
 				htmlText.append("<br/>" + res.getString(R.string.genBy) + " " + res.getString(R.string.app_name));
-				htmlText.append("<br/> <input type=\"button\" onclick=\"fontAdjust('grow');\" value=\"AUMENTAR LETRA\"/>\r\n");
-				htmlText.append(" <input type=\"button\" onclick=\"fontAdjust('snall');\" value=\"diminuir letra\"/>\r\n");
+				htmlText.append("<br/> <input type=\"button\" onclick=\"fontAdjust('grow');\" value=\"" + res.getString(R.string.txtAumentar) + "\"/>\r\n");
+				htmlText.append(" <input type=\"button\" onclick=\"fontAdjust('snall');\" value=\"" + res.getString(R.string.txtDiminuir) + "\"/>\r\n");
 				htmlText.append("<br/><div id='principal'>");
 				return htmlText.toString();
 			}

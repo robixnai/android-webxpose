@@ -43,4 +43,6 @@
     <string name="validationProblems">O servidor não foi iniciado.</string>
     <string name="txtLink">Wiki do Projeto</string>
     <string name="txtHelp">Ajuda</string>
+    <string name="txtAumentar">AUMENTAR LETRA</string>
+    <string name="txtDiminuir">diminuir letra</string>
 </resources>

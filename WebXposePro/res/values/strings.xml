@@ -43,4 +43,6 @@
     <string name="validationProblems">Server not started due to input errors. Correct them and try again.</string>
     <string name="txtLink">Project WiKi</string>
     <string name="txtHelp">Help</string>
+    <string name="txtAumentar">BIGGER FONT</string>
+    <string name="txtDiminuir">smaller font</string>
 </resources>
