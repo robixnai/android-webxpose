@@ -45,6 +45,9 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -323,5 +326,22 @@ public class WsController extends Activity {
    		}
 
     	return resultado;
+    }
+    
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.contexto, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+            switch (item.getItemId()) {
+            case R.id.mnuCntAjuda:
+                    Intent i = new Intent (this.getApplicationContext(), WsControllerHelp.class);
+                    this.startActivity(i);
+                    return true;
+            default: return super.onOptionsItemSelected(item); 
+            }
     }
 }
