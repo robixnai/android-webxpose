@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-	<string name="siteTitleTT">This name will be shown in the body of the generated web page.</string>
-	<string name="serverPortTT">This is the TCP port that users will use to navigate to your site (over 1024).</string>
-	<string name="adminPortTT">This is the TCP port used to administer your site (over 1024 and different from server Port).</string>
-	<string name="startTT">This button starts the site.</string>
-	<string name="stopTT">This button stops the site.</string>
-	<string name="sharedTT">This is the shared folder name. It can be any folder under /sdcard.</string>
-</resources>

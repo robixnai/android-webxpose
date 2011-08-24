@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Endereço IP</string>
+    <string name="app_name">WebXpose</string>
+    <string name="actConNotAvailableNull">Não há conexão ativa (info null)</string>
+    <string name="actConNotAvailable">Não há conexão ativa</string>
+    <string name="actConNotConnected">Conexão ativa desconectada</string>
+    <string name="onstartok">O Web Server está rodando</string>
+    <string name="iniciando">Iniciando o serviço do Web Server...</string>
+    <string name="porta">Porta TCP</string>
+    <string name="portaadm">Porta TCP Admin</string>
+    <string name="defaultPort">8080</string>
+    <string name="defaultAdminPort">8081</string>
+    <string name="path">Pasta compartilhada</string>
+    <string name="defaultPath">/sdcard</string>
+    <string name="rootport">O uso de portas menores que 1024 requer permissão de \"root\"</string>
+    <string name="invalidPort">Deve ser numérica e superior a 1024.</string>
+    <string name="invalidEqualPorts">As portas devem ser diferentes.</string>
+    <string name="serverName">Web sharing server - The Code Bakers. Version: </string>
+    <string name="insecurePath">Todos os diretórios devem começar por \"/sdcard\"</string>
+    <string name="invalidPath">Deve ser uma pasta válida dentro de: /sdcard.</string>
+    <string name="invalidTitle">O título não pode ter tags HTML.</string>
+    <string name="folderNotFound">A pasta deve existir dentro de: /sdcard</string>
+    <string name="errorOpeningPort">Exceção ao abrir a porta </string>
+    <string name="errorOpeningAdminPort">Exceção ao abrir a porta admin </string>
+    <string name="serviceStarted">Serviço iniciado</string>
+    <string name="stopService">Parar serviço</string>
+    <string name="startService">Iniciar Web Server</string>
+    <string name="startCompleted">Iniciado. Verifique usando um navegador.</string>
+    <string name="stopCompleted">Terminado. Verifique usando um navegador.</string>
+    <string name="serverIsStarted">Aparentemente está em execução.</string>
+    <string name="serverNotStarted">Aparentemente está parado.</string>
+    <string name="pathNotFound">A pasta não existe:</string>
+    <string name="dirListing">Listagem de diretório:</string>
+    <string name="genBy">Criado por</string>
+    <string name="voltar">voltar</string>
+    <string name="iAgree">Concordo com os termos da licença.</string>
+    <string name="btnFtBack">Fechar</string>
+    <string name="userNotAgree">Você só pode usar o programa se concordar com a licença.</string>
+    <string name="errorWritingPrefs">Erro ao gravar as preferências.</string>
+    <string name="WXPROprefs">wxproprefs</string>
+    <string name="lblNomeCel">Título do Site</string>
+    <string name="validationProblems">O servidor não foi iniciado.</string>
+    <string name="txtLink">Wiki do Projeto</string>
+    <string name="txtHelp">Ajuda</string>
+</resources>

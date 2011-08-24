@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="ftstring">
+WebXpose Pro - Licença de usuário final\r\n
+\r\n
+Copyright (C) 2011 The Code Bakers\r\n
+Autores: Cleuton Sampaio e Francisco Rodrigues\r\n
+e-mail: thecodebakers@gmail.com\r\n
+Projeto: http://code.google.com/p/android-webxpose\r\n
+Site: http://www.thecodebakers.org\r\n
+\r\n
+Distribuído sob a licença GNU GPL, Version 3.0 (the "License");\r\n
+Você não pode usar este programa exceto se estiver de acordo com a licença.\r\n
+Você pode obter uma cópia da licença no site:\r\n
+     http://gplv3.fsf.org/\r\n
+\r\n
+A não ser quando requerido pela lei ou concordado expressamente, \r\n
+o software é distribuído de forma "AS IS" (use como está),\r\n
+SEM QUAISQUER GARANTIAS OU CONDIÇÕES DE QUALQUER TIPO, sejam expressas ou implícitas.\r\n
+Leia a licença para saber as permissões e limitações de uso.\r\n
+\r\n
+Sobre a GPL V 3 existe uma adição:
+- Os autores reservam o direito de criar versões derivadas proprietárias do programa.\r\n
+ \r\n
+@author Cleuton Sampaio e Francisco Rogrigues - thecodebakers@gmail.com\r\n
+</string>
+</resources>

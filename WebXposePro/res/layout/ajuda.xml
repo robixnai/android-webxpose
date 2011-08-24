@@ -19,17 +19,17 @@
 	  <TextView
 	  	android:id="@+id/txtAjuda"
 	  	style="@style/texto1"
-	  	android:text="@string/ftstring"
+	  	android:text="@string/txtAjuda"
 	  	android:layout_width="fill_parent"
 	  	android:layout_height="wrap_content"
 	    />
-	  <TextView
+	  <Button
 	  	android:id="@+id/txtLink"
-	  	style="@style/texto2"
 	  	android:onClick="wiki"
 	  	android:text="@string/txtLink"
 	  	android:layout_width="fill_parent"
 	  	android:layout_height="wrap_content"
+		android:gravity="center_horizontal"  
 	    />
 	  <Button
 	  	android:id="@+id/btnClose"
