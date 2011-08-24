@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+<TextView
+	style="@style/texto1"  
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content" 
+    android:text="@string/hello"
+    />
+<TextView  
+	style="@style/texto1"  
+	android:id="@+id/ipAddress"
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content" 
+    />
+<TextView  
+	style="@style/texto1"  
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content" 
+    android:text="@string/lblNomeCel"
+    />    
+<EditText  
+	android:id="@+id/txtNomeCel"
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content"
+    android:maxLength="50" 
+	
+   />    
+    
+<TextView  
+	style="@style/texto1"  
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content" 
+    android:text="@string/porta"
+    />    
+<EditText  
+	android:id="@+id/porta"
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content" 
+    android:text="@string/defaultPort"
+    android:inputType="number"
+    android:numeric="integer"
+    android:maxLength="5" 
+    
+    />
+<TextView  
+	style="@style/texto1"  
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content" 
+    android:text="@string/portaadm"
+    />    
+<EditText  
+	android:id="@+id/portaadm"
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content" 
+    android:text="@string/defaultAdminPort"
+    android:inputType="number"
+    android:numeric="integer"
+    android:maxLength="5" 
+    
+    />    
+<TextView  
+	style="@style/texto1"  
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content" 
+    android:text="@string/path"
+    />     
+<EditText  
+	android:id="@+id/sharedFolder"
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content" 
+    android:text="@string/defaultPath"
+    android:maxLength="255" 
+    
+    />   
+	<RelativeLayout
+		xmlns:android="http://schemas.android.com/apk/res/android"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	>
+		<Button
+			android:layout_alignParentLeft="true"
+			android:id="@+id/btnStart"
+			android:text="@string/startService"
+		    android:layout_width="wrap_content" 
+		    android:layout_height="wrap_content" 
+			android:onClick="start"
+			android:enabled="false"
+			
+		/>
+		<Button
+			android:layout_alignParentRight="true"
+			android:id="@+id/btnStop"
+			android:text="@string/stopService"
+		    android:layout_width="wrap_content" 
+		    android:layout_height="wrap_content" 
+			android:onClick="stop"
+			android:enabled="false"
+			
+		/>
+	</RelativeLayout>
+</LinearLayout>

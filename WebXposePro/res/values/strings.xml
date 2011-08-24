@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Current Server IP Address</string>
+    <string name="app_name">WebXpose</string>
+    <string name="actConNotAvailableNull">Active connection not available (info null)</string>
+    <string name="actConNotAvailable">Active connection not available</string>
+    <string name="actConNotConnected">Active connection not connected</string>
+    <string name="onstartok">Web Server Service Started</string>
+    <string name="iniciando">Starting Web Server Service...</string>
+    <string name="porta">TCP Port</string>
+    <string name="portaadm">TCP Admin Port</string>
+    <string name="defaultPort">8080</string>
+    <string name="defaultAdminPort">8081</string>
+    <string name="path">Shared Folder</string>
+    <string name="defaultPath">/sdcard</string>
+    <string name="rootport">The use of ports lower than 1024 requires root permission</string>
+    <string name="invalidPort">Must be numeric and above 1024.</string>
+    <string name="invalidEqualPorts">Ports must be different.</string>
+    <string name="serverName">Web sharing server - The Code Bakers. Version: </string>
+    <string name="insecurePath">All paths must begin with \"/sdcard\"</string>
+    <string name="invalidPath">Must be a valid path and under /sdcard.</string>
+    <string name="invalidTitle">Site Title cannot have HTML tags.</string>
+    <string name="folderNotFound">Folder must exist inside /sdcard</string>
+    <string name="errorOpeningPort">Exception opening port</string>
+    <string name="errorOpeningAdminPort">Exception opening admin port</string>
+    <string name="serviceStarted">Service started</string>
+    <string name="stopService">Stop Service</string>
+    <string name="startService">Start Web Server</string>
+    <string name="startCompleted">Finish starting. Check the service using a browser.</string>
+    <string name="stopCompleted">Finish stopping. Check if the service is running using a browser.</string>
+    <string name="serverIsStarted">Server appears to be running.</string>
+    <string name="serverNotStarted">Server appears to be stopped.</string>
+    <string name="pathNotFound">The path does not exist:</string>
+    <string name="dirListing">Folder listing:</string>
+    <string name="genBy">Created by</string>
+    <string name="voltar">back</string>
+    <string name="iAgree">I agree with the license terms.</string>
+    <string name="btnFtBack">Close</string>
+    <string name="userNotAgree">You can only use the program if you agree with the license terms.</string>
+    <string name="errorWritingPrefs">Error writing preferences.</string>
+    <string name="WXPROprefs">wxproprefs</string>
+    <string name="lblNomeCel">Site title</string>
+    <string name="validationProblems">Server not started due to input errors. Correct them and try again.</string>
+</resources>
