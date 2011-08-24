@@ -7,7 +7,7 @@ O *WebXpose* é um pequeno servidor web, que permite a você compartilhar arquiv
 
 = Detalhes =
 
-Ele "escuta" pedidos de conexão na porta selecionada por você, logo, você deve acrescentar :<porta> na URL utilizada para acessar o conteúdo. Por exemplo: http://10.0.2.15:8080.
+Ele "escuta" pedidos de conexão na porta selecionada por você, logo, você deve acrescentar ":porta" na URL utilizada para acessar o conteúdo. Por exemplo: http://10.0.2.15:8080.
 
 Ele também necessita abrir uma porta para acesso administrativo. Sugerimos que você sempre utilize os valores default, que são: 8080 e 8081.
 
