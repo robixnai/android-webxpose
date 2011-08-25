@@ -188,7 +188,7 @@ public class WebServerService extends Service {
 				
 				// Ler o que veio no request, o querystring. Só lemos uma única linha
 				String linha = br.readLine();
-				Log.d("WebService","@@@ Admin request: " + linha);
+				//Log.d("WebService","@@@ Admin request: " + linha);
 				if (linha.indexOf("shutdown.cgi") >= 0) {
 					Log.i("WebService","@@@@@@@Shutdown");
 					WebServerService.selfRef.stopSelf();
@@ -261,7 +261,7 @@ public class WebServerService extends Service {
 					// Ler o que veio no request, o querystring. Só lemos uma única linha
 					String linha = br.readLine();
 
-					Log.d("WebService",linha);
+					//Log.d("WebService",linha);
 					
 					HttpRequest request = new HttpRequest();
 					request.servico = (WebServerService) WebServerService.selfRef;
@@ -275,21 +275,21 @@ public class WebServerService extends Service {
 					bw.flush();
 					cs.close();
 					*/
-					Log.d("WebServerService", ">>> beginning transmission of response: " + request.contentLength);
+					//Log.d("WebServerService", ">>> beginning transmission of response: " + request.contentLength);
 					DataOutputStream dos = new DataOutputStream(cs.getOutputStream());
 					for (long inx = 0; inx < request.responseBytes.length; inx++) {
-						//Log.d("WebServerService", ">>> byte " + inx + ": " + ((char) request.responseBytes[(int) inx]));
+						////Log.d("WebServerService", ">>> byte " + inx + ": " + ((char) request.responseBytes[(int) inx]));
 						dos.write(request.responseBytes[(int) inx]); 
 					}
 					dos.flush();
 					dos.close();
-					Log.d("WebServerService", ">>> ending transmission of response");
+					//Log.d("WebServerService", ">>> ending transmission of response");
 				}
 				catch(IOException ioe) {
-					Log.d("WebService","#### IOEXCEPTION: " + ioe.getMessage());
+					//Log.d("WebService","#### IOEXCEPTION: " + ioe.getMessage());
 				}
 				catch(Exception ex) {
-					Log.d("WebService","####!!!! EXCEPTION: " + ex.getMessage());
+					//Log.d("WebService","####!!!! EXCEPTION: " + ex.getMessage());
 				}
 			}
 			
@@ -321,7 +321,7 @@ public class WebServerService extends Service {
 				hdr += "Content-length: " + this.contentLength + "\r\n";
 				hdr += "Connection: close\r\n";
 				this.httpHeader = hdr + "\r\n";
-				Log.d("WebServerService", this.httpHeader);
+				//Log.d("WebServerService", this.httpHeader);
 			}
 			
 			void decodeRequest (String line) {
@@ -387,7 +387,7 @@ public class WebServerService extends Service {
 				try {
 					FileInputStream fis = new FileInputStream(this.desiredFileDir);
 					saida = new byte[(int) this.contentLength];
-					Log.d("WebServerService", "@@@ Getting file bytes. Total: " + this.contentLength);
+					//Log.d("WebServerService", "@@@ Getting file bytes. Total: " + this.contentLength);
 					int pos = 0;
 					while (true) {
 						int lido = fis.read();
@@ -399,7 +399,7 @@ public class WebServerService extends Service {
 				    }
 					fis.close();
 					this.httpStatus = WebServerService.HTTP_OK;
-					Log.d("WebServerService", "@@@ Finish getting bytes.");
+					//Log.d("WebServerService", "@@@ Finish getting bytes.");
 				} catch (FileNotFoundException e) {
 					Log.e(TAG, e.getMessage());
 					Toast.makeText(((WebServerService) WebServerService.selfRef).getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG);
@@ -508,10 +508,10 @@ public class WebServerService extends Service {
 
 			private String getParent(File desiredFile) {
 				String retorno = "";
-				Log.d("WebServerService", "@@@ " + desiredFile.getAbsolutePath());
+				//Log.d("WebServerService", "@@@ " + desiredFile.getAbsolutePath());
 				int posLast = desiredFile.getAbsolutePath().lastIndexOf('/');
 				retorno = desiredFile.getAbsolutePath().substring(0, posLast);
-				Log.d("WebServerService", "@@@ " + retorno);
+				//Log.d("WebServerService", "@@@ " + retorno);
 				return retorno;
 			}
 

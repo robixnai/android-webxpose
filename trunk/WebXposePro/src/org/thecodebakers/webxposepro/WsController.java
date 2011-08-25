@@ -322,7 +322,7 @@ public class WsController extends Activity {
    		String sharedFolder = this.defaultPath.getText().toString();
    		if (!verifyPath(sharedFolder)) {
    			resultado = false;
-   			this.defaultPath.setError(res.getString(R.string.insecurePath));
+   			this.defaultPath.setError(res.getString(R.string.invalidPath));
    		}
 
     	return resultado;
