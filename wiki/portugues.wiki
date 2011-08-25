@@ -19,4 +19,4 @@ Você somente pode expor arquivos que estejam em seu sdcard. Você pode deixar o
 
 WebXpose abre um soquete TCP, para que você possa usá-lo em qualquer rede TCP/IP. Mas existem algumas limitações, por exemplo, não há suporte nativo para redes WiFi AdHoc no Android, de modo a única maneira de compartilhar arquivos usando a conexão WiFi é através de um roteador Wireless. Outra limitação importante sobre conexões 3G, o que, normalmente, não permitem que você abra um socket passivo para o mundo.
 
-Mas, se ambos os dispositivos estão sob a mesma rede, por exemplo, um laptop e seu tablet (ou smartphone), você pode compartilhar arquivos com qualquer dispositivo que tenha um navegador instalado. Basta dizer-lhes a URL: http:// [seu endereço de ip - mostrado no WebXpose]:[porta que você escolheu].
+Mas, se ambos os dispositivos estão sob a mesma rede, por exemplo, um laptop e seu tablet (ou smartphone), você pode compartilhar arquivos com qualquer dispositivo que tenha um navegador instalado. Basta dizer-lhes a URL: http:// <seu endereço de ip - mostrado no WebXpose>:<porta que você escolheu>.
