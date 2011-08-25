@@ -17,6 +17,6 @@ You can only display files that are on your sdcard. You can leave the default "/
 
 = Using WebXpose =
 
-WebXpose opens a TCP Socket, so you can use it in any TCP/IP network. But this has some limitations, for example, there is no native support for AdHoc WiFi networks in Android, so the only way to share files using WiFi connection is through a Wireless router. Other important limitation is 3G connections, which, normally, does not allow you to open a passive socket to the world. 
+WebXpose opens a TCP Socket, so you can use it in any TCP/IP network. But this has some limitations, for example, there is no native support for AdHoc WiFi networks in Android, so the only way to share files using WiFi connection is through a Wireless router. Other important limitation is 3G connections, which, normally, does not allow you to open a passive socket to the world. Although we have tested in two of the largest Brazilian operators (TIM and VIVO) and it worked fine!
 
 But, if both devices are under the same network, for example a Laptop and your tablet (or smartphone), you can share files with any device that has a Browser installed. Just tell them to type: http://<your ip address - shown in the WebXpose activity>:<the port you choose>.
