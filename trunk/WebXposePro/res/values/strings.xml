@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="hello">Current Server IP Address</string>
-    <string name="app_name">WebXpose</string>
+    <string name="app_name">WebXpose 1.1</string>
     <string name="actConNotAvailableNull">Active connection not available (info null)</string>
     <string name="actConNotAvailable">Active connection not available</string>
     <string name="actConNotConnected">Active connection not connected</string>

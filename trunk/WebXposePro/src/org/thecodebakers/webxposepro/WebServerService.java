@@ -229,7 +229,8 @@ public class WebServerService extends Service {
 			Thread clientThread;
 			while (true) {
 				try {
-					ProcessaHTTP processaHTTP = new ProcessaHTTP(srvSock);
+					Socket s = srvSock.accept(); // Aqui 26/08/2011 - Cleuton - dar o accept neste Thread
+					ProcessaHTTP processaHTTP = new ProcessaHTTP(s); // Aqui 26/08/2011 - Cleuton
 					clientThread = new Thread(processaHTTP);
 					clientThread.start();
 				}
@@ -246,8 +247,8 @@ public class WebServerService extends Service {
 			
 			private Socket cs;
 			
-			ProcessaHTTP(ServerSocket ss) throws IOException {
-				this.cs = ss.accept();
+			ProcessaHTTP(Socket ss) throws IOException {  // Aqui 26/08/2011 - Cleuton
+				this.cs = ss; // Aqui 26/08/2011 - Cleuton
 			}
 			
 			public void run() {
