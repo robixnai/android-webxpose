@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="hello">Endereço IP</string>
-    <string name="app_name">WebXpose</string>
+    <string name="app_name">WebXpose 1.1</string>
     <string name="actConNotAvailableNull">Não há conexão ativa (info null)</string>
     <string name="actConNotAvailable">Não há conexão ativa</string>
     <string name="actConNotConnected">Conexão ativa desconectada</string>
